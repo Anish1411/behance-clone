@@ -4,7 +4,7 @@ import { behance_logo } from '../../Data'
 
 export function Footer() {
     return (
-        <section className=' py-3 fixed w-full bottom-0 bg-gray-500 text-white'>
+        <section className=' py-3 fixed w-full bottom-0 bg-gray-500 text-white mt-16'>
             <div className="container mx-auto ">
                 {/* left side */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 mt-3 ">

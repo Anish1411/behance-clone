@@ -26,7 +26,7 @@
   position: absolute;
 }
 
-.bg-overlay {
+/* .bg-overlay {
   visibility: hidden;
   width: 100%;
   height: 100%;
@@ -35,7 +35,7 @@
   position: absolute;
   left: 0;
   top: 0;
-}
+} */
 
 .category-item {
   transition: 0.25s linear all;

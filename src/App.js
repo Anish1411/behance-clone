@@ -2,14 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import Header from './components/header/Header';
 import { Footer } from './components/footer/Footer';
-// import Main from './components/main/Main';
+import MainPage from './components/MainPage/MainPage';
 
 function App() {
   return (
-    <div className="main relative overflow-hidden">
+    <div >
       <Header />
-      {/* <Main /> */}
-      <Footer />
+      <MainPage />
+      {/* <Footer /> */}
     </div>
   );
 }
