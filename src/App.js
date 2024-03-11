@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/header/Header';
-// import Footer from './components/Footer/Footer';
+import { Footer } from './components/footer/Footer';
 // import Main from './components/main/Main';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div className="main relative overflow-hidden">
       <Header />
       {/* <Main /> */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

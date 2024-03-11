@@ -8,7 +8,7 @@ import { MdArrowDropDown } from 'react-icons/md';
 import { CgMenuLeft } from 'react-icons/cg';
 import { IoSearchSharp } from 'react-icons/io5';
 import { behance_logo } from "../../Data";
-import Button from './Button';
+import Button from '../Button';
 
 
 const openMenu = () => {
