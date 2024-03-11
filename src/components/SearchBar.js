@@ -4,7 +4,7 @@ import { MdArrowDropDown } from 'react-icons/md';
 import { IoSearchSharp } from 'react-icons/io5';
 import Button from './Button';
 
-export default function SearchBar() {
+export default function SearchBar({ onSearchChange }) {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
@@ -14,21 +14,23 @@ export default function SearchBar() {
         setSearchTerm(value);
 
         // Filter suggestions based on the input value
-        const filteredSuggestions = AllItems.filter(option =>
-            option.feUser.toLowerCase().includes(value.toLowerCase())
+        const filteredItems = AllItems.filter(option =>
+            option.feUser.toLowerCase().includes(value.toLowerCase()) ||
+            option.feUser.toLowerCase().startsWith(value.toLowerCase())
         );
 
-        setSuggestions(filteredSuggestions);
+
+        setSuggestions(filteredItems);
+        onSearchChange(value)
     };
 
-    const handleSuggestionClick = (suggestion) => {
-        // Perform actions when a suggestion is clicked (e.g., search)
-        console.log("Clicked on suggestion:", suggestion);
+    // const handleSuggestionClick = (suggestion) => {
+    //     console.log("Selected suggestion:", suggestion);
 
-        // Clear the input and suggestions
-        setSearchTerm("");
-        setSuggestions([]);
-    };
+    //     setSearchTerm(suggestion.feSearch);
+    //     setSuggestions([]);
+    //     onSearchChange(suggestion.feSearch);
+    // };
 
     return (
         <>
@@ -48,6 +50,7 @@ export default function SearchBar() {
                                 <IoSearchSharp />
                             </div>
                         </div>
+
                         <div className="tags-search bg-white px-4 py-3 border-l-2 ">
                             <ul className='flex items-center'>
                                 <li className=' text-black lg:bg-black mx-1 py-1 lg:text-white px-3 rounded-full font-medium text-sm'><a href="">Projects</a></li>
@@ -60,19 +63,21 @@ export default function SearchBar() {
                                     ))
                                 }
                             </ul>
-                            <ul className='flex items-center'>
-                                {suggestions.map((suggestion, index) => (
-                                    <li
-                                        key={index}
-                                        className='mx-1 font-medium text-sm py-1 px-3 hidden lg:block rounded-full hover:bg-[#eee]'
-                                        onClick={() => handleSuggestionClick(suggestion)}
-                                    >
-                                        <a href="">{suggestion.sItems}</a>
-                                    </li>
-                                ))}
-                            </ul>
                         </div>
                     </div>
+                    {/* {suggestions.length > 0 && (
+                        <div className="absolute top-full left-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg w-full z-10">
+                            {suggestions.map((suggestion, index) => (
+                                <div
+                                    key={index}
+                                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                                    onClick={() => handleSuggestionClick(suggestion)}
+                                >
+                                    {suggestion.feSearch}
+                                </div>
+                            ))}
+                        </div>
+                    )} */}
                 </div>
 
             </div>
@@ -97,8 +102,10 @@ export default function SearchBar() {
                     <Button />
 
 
+
                 </div>
             </div>
+
         </>
     )
 }
