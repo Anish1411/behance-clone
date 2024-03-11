@@ -1,13 +1,14 @@
 import React from 'react'
-import { IoSearchSharp } from 'react-icons/io5';
+import { adobe_cloude } from "../../Data";
+import { adobeLogo } from "../../Data";
+import { searchOptions } from "../../Data";
+import { tagName } from "../../Data";
 import { IoClose } from 'react-icons/io5';
 import { MdArrowDropDown } from 'react-icons/md';
 import { CgMenuLeft } from 'react-icons/cg';
+import { IoSearchSharp } from 'react-icons/io5';
 import { behance_logo } from "../../Data";
-import { adobe_cloude } from "../../Data";
-import { adobeLogo } from "../../Data";
-import { searchType } from "../../Data";
-import { tagName } from "../../Data";
+import Button from './Button';
 
 
 const openMenu = () => {
@@ -86,8 +87,8 @@ const Header = () => {
                             <div className="search-area flex items-center">
                                 <div className="search-box w-full  border-2 rounded-full bg-[#f9f9f9] overflow-hidden flex items-center justify-between">
                                     <div className="input-box relative lg:w-full">
-                                        <input type="text" name="" placeholder='Search the creative world at work' className='bg-transparent outline-none w-[90%] lg:w-full truncate pl-16 text-md lg:text-xl font-bold text-[#222] placeholder:text-[#777]' id="" />
-                                        <div className="search-icon text-2xl text-[#777] absolute top-[2px] left-4">
+                                        <input type="text" name="" placeholder='Search the creative world at work' className='bg-transparent outline-none w-[90%] lg:w-full truncate pl-16 text-md lg:text-xl font-bold text-[#222] placeholder:text-[#565555]' id="" />
+                                        <div className="search-icon text-2xl text-[#1d1d1d] absolute top-[2px] left-4">
                                             <IoSearchSharp />
                                         </div>
                                     </div>
@@ -98,7 +99,7 @@ const Header = () => {
                                                 <MdArrowDropDown />
                                             </div>
                                             {
-                                                searchType.map((tags) => (
+                                                searchOptions.map((tags) => (
                                                     <li className='mx-1 font-medium text-sm py-1 px-3 hidden lg:block rounded-full hover:bg-[#eee]'><a href="">{tags.sItems}</a></li>
                                                 ))
                                             }
@@ -120,20 +121,22 @@ const Header = () => {
                                             <div className="tname px-2">
                                                 <p className='text-sm font-bold'> {tools.tags}</p>
                                             </div>
-                                            <div className="dt-arrow">
-                                                <MdArrowDropDown />
-                                            </div>
+
                                         </div>
                                     ))}
                                 </div>
-                                <div className="recm-item">
-                                    <span className='text-xs font-bold text-[#626161]'>Sort</span>
-                                    <div className="flex items-center ">
+                                {/* <div className="recm-item"> */}
+                                {/* <span className='text-xs font-bold text-[#626161]'>Sort</span> */}
+                                {/* <div className="flex items-center ">
                                         <p className='text-sm font-medium pr-1'>Recommended</p>
                                         <MdArrowDropDown />
-                                    </div>
+                                    </div> */}
 
-                                </div>
+                                <Button />
+
+
+                                {/* </div> */}
+
                             </div>
                         </div>
                     </div>

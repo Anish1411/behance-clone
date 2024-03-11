@@ -1,30 +1,25 @@
 import { SiAdobecreativecloud } from 'react-icons/si';
-import { FaTools } from 'react-icons/fa';
+import { BsCreditCard2BackFill } from 'react-icons/bs';
+import { AiFillLike } from 'react-icons/ai';
+import { AiTwotoneEye } from 'react-icons/ai';
 import { HiColorSwatch } from 'react-icons/hi';
 import { IoLocationSharp } from 'react-icons/io5';
 import { MdSchool } from 'react-icons/md';
 import { IoMdAttach } from 'react-icons/io';
-import { BsCreditCard2BackFill } from 'react-icons/bs';
-import { AiFillLike } from 'react-icons/ai';
-import { AiTwotoneEye } from 'react-icons/ai';
-
-
+import { FaTools } from 'react-icons/fa';
 
 
 export const behance_logo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Behance_logo.svg/1280px-Behance_logo.svg.png';
 export const adobe_cloude = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Adobe_Creative_Cloud_rainbow_icon.svg/640px-Adobe_Creative_Cloud_rainbow_icon.svg.png';
 export const adobeLogo = 'https://cdn.iconscout.com/icon/free/png-256/adobe-254-761738.png';
 
-export const searchType = [
+export const searchOptions = [
 
     {
         sItems: 'Images',
     },
     {
         sItems: 'Prototypes',
-    },
-    {
-        sItems: 'Streams',
     },
     {
         sItems: 'People',
@@ -72,7 +67,7 @@ export const tagName = [
 ]
 
 
-export const behanceItem = [
+export const AllItems = [
     {
         fePatch: 'https://a5.behance.net/eb6198339b5bd9210ee85c5041d2da69b52ae5a5/img/galleries/icons/ribbons/1x/graphic-design.png?cb=264615658',
         featureImg: 'https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/24806c126581961.Y3JvcCwxMzgwLDEwODAsMjU2LDA.jpg',
