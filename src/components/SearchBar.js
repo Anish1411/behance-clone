@@ -1,85 +1,130 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { searchOptions, tagName, AllItems } from "../Data";
 import { MdArrowDropDown } from 'react-icons/md';
-import { IoSearchSharp } from 'react-icons/io5';
+import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import Button from './Button';
+import Card from "./Card";
+import Autosuggest from "react-autosuggest";
 
-export default function SearchBar({ onSearchChange }) {
-
-    const [searchTerm, setSearchTerm] = useState("");
+export default function SearchBar({ selectedCategory }) {
+    const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+    const [filteredItems, setFilteredItems] = useState([]);
 
-    const handleInputChange = (event) => {
-        const value = event.target.value;
-        setSearchTerm(value);
+    useEffect(() => {
+        // Fetch filtered items based on the input length
+        const fetchFilteredItems = () => {
+            const inputValue = value.trim().toLowerCase();
+            const inputLength = inputValue.length;
+            if (inputLength === 0) {
+                // If input is empty, show all items
+                const categoryFilteredItems = AllItems.filter(item => item.feCategory === selectedCategory);
+                setFilteredItems(categoryFilteredItems);
+            }
+            else {
+                const filteredItems = AllItems.filter((item) =>
+                    item.feSearch.toLowerCase().includes(inputValue) && item.feCategory === selectedCategory
+                );
+                setFilteredItems(filteredItems);
+            }
+            console.log("filteredItems", filteredItems)
+        };
 
-        // Filter suggestions based on the input value
-        const filteredItems = AllItems.filter(option =>
-            option.feUser.toLowerCase().includes(value.toLowerCase()) ||
-            option.feUser.toLowerCase().startsWith(value.toLowerCase())
-        );
+        fetchFilteredItems();
+    }, [value, selectedCategory]);
 
-
-        setSuggestions(filteredItems);
-        onSearchChange(value)
+    const onChange = (event, { newValue }) => {
+        setValue(newValue);
     };
 
-    // const handleSuggestionClick = (suggestion) => {
-    //     console.log("Selected suggestion:", suggestion);
+    const onSuggestionsFetchRequested = ({ value }) => {
+        setSuggestions(() => getSuggestions(value));
+    };
 
-    //     setSearchTerm(suggestion.feSearch);
-    //     setSuggestions([]);
-    //     onSearchChange(suggestion.feSearch);
-    // };
+    const onSuggestionsClearRequested = () => {
+        setSuggestions([]);
+    };
+
+    const inputProps = {
+        placeholder: "Search the Creative World At Work",
+        value,
+        onChange: onChange,
+    };
+
+    const getSuggestions = (value) => {
+        const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+
+        if (inputLength === 0) {
+            return AllItems.map((item) => ({ feSearch: item.feSearch }));
+        }
+
+        const uniqueFeSearchValues = [
+            ...new Set(AllItems.map((item) => item.feSearch.toLowerCase())),
+        ];
+
+        return uniqueFeSearchValues
+            .filter(
+                (feSearch) =>
+                    feSearch.slice(0, inputLength) === inputValue ||
+                    feSearch.includes(value.toLowerCase()) ||
+                    feSearch.startsWith(value.toLowerCase())
+            )
+            .map((feSearch) => ({ feSearch }));
+    };
+
+    const getSuggestionValue = (suggestion) => suggestion.feSearch;
+
+    const renderSuggestion = (suggestion) => (
+        <div
+            className="p-1 cursor-pointer flex items-center justify-between px-10 bg-gray-300"
+            onClick={() => handleSuggestionClick(suggestion)}
+        >
+            <span className="text-md lg:text-lg  text-[#222]">{suggestion.feSearch}</span>
+        </div>
+    );
+
+    const handleSuggestionClick = (suggestion) => {
+        setValue(suggestion.feSearch);
+        setSuggestions([]);
+    };
 
     return (
         <>
-            <div className="search-area p-5">
+            <div className="search-area p-5 relative">
                 <div className="search-area flex items-center">
-                    <div className="search-box w-full  border-2 rounded-full bg-[#f9f9f9] overflow-hidden flex items-center justify-between">
-                        <div className="input-box relative lg:w-full">
-                            <input
-                                type="text"
-                                name=""
-                                placeholder='Search the creative world at work'
-                                className='bg-transparent outline-none w-[90%] lg:w-full truncate pl-16 text-md lg:text-xl font-bold text-[#222] placeholder:text-[#565555]'
-                                value={searchTerm}
-                                onChange={handleInputChange}
-                            />
-                            <div className="search-icon text-2xl text-[#1d1d1d] absolute top-[2px] left-4">
-                                <IoSearchSharp />
+
+                    <Autosuggest
+                        suggestions={suggestions}
+                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                        onSuggestionsClearRequested={onSuggestionsClearRequested}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        inputProps={{
+                            ...inputProps,
+                            className: "w-full lg:w-full outline-none border-2 rounded-full  truncate pl-16 text-md lg:text-xl font-bold text-[#222] placeholder:text-[#777]",
+                        }}
+                        theme={{
+                            container: "m-2 relative w-full",
+                            input: "bg-transparent",
+                        }}
+                    />
+
+                    <div className="tags-search bg-white px-4 py-3 border-l-2 ">
+                        <ul className='flex items-center'>
+                            <li className=' text-black lg:bg-black mx-1 py-1 lg:text-white px-3 rounded-full font-medium text-sm'><a href="">Projects</a></li>
+                            <div className="dt-arrow block lg:hidden">
+                                <MdArrowDropDown />
                             </div>
-                        </div>
-
-                        <div className="tags-search bg-white px-4 py-3 border-l-2 ">
-                            <ul className='flex items-center'>
-                                <li className=' text-black lg:bg-black mx-1 py-1 lg:text-white px-3 rounded-full font-medium text-sm'><a href="">Projects</a></li>
-                                <div className="dt-arrow block lg:hidden">
-                                    <MdArrowDropDown />
-                                </div>
-                                {
-                                    searchOptions.map((tags) => (
-                                        <li className='mx-1 font-medium text-sm py-1 px-3 hidden lg:block rounded-full hover:bg-[#eee]'><a href="">{tags.sItems}</a></li>
-                                    ))
-                                }
-                            </ul>
-                        </div>
+                            {
+                                searchOptions.map((tags) => (
+                                    <li className='mx-1 font-medium text-sm py-1 px-3 hidden lg:block rounded-full hover:bg-[#eee]'><a href="">{tags.sItems}</a></li>
+                                ))
+                            }
+                        </ul>
                     </div>
-                    {/* {suggestions.length > 0 && (
-                        <div className="absolute top-full left-0 bg-white border border-gray-300 mt-1 rounded-md shadow-lg w-full z-10">
-                            {suggestions.map((suggestion, index) => (
-                                <div
-                                    key={index}
-                                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                                    onClick={() => handleSuggestionClick(suggestion)}
-                                >
-                                    {suggestion.feSearch}
-                                </div>
-                            ))}
-                        </div>
-                    )} */}
-                </div>
 
+                </div>
             </div>
 
             <div className="hidden lg:block">
@@ -93,19 +138,14 @@ export default function SearchBar({ onSearchChange }) {
                                 <div className="tname px-2">
                                     <p className='text-sm font-bold'> {tools.tags}</p>
                                 </div>
-
                             </div>
                         ))}
                     </div>
 
-
-                    <Button />
-
-
-
                 </div>
             </div>
 
+            <Card items={filteredItems} />
         </>
-    )
+    );
 }

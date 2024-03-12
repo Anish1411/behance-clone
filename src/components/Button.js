@@ -6,15 +6,18 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Button() {
-    const [selectedOption, setSelectedOption] = useState('Recommended');
+export default function Button({ onCategoryChange }) {
+    const [selectedOption, setSelectedOption] = useState('All');
 
     const handleMenuClose = () => {
         console.log('Selected option:', selectedOption);
     };
 
     const handleMenuItemClick = (option) => {
+        console.log(option);
         setSelectedOption(option);
+        onCategoryChange(option)
+        console.log(option);
     };
 
     return (
@@ -37,7 +40,7 @@ export default function Button() {
             >
                 <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
-                        {['Recommended', 'Curated', 'Most Appreciated', 'Most Viewed', 'Most Discussed', 'Most Recent'].map((option) => (
+                        {['All', 'Recommended', 'Curated', 'Most Appreciated', 'Most Viewed', 'Most Discussed', 'Most Recent'].map((option) => (
                             <Menu.Item key={option}>
                                 {({ active }) => (
                                     <button
