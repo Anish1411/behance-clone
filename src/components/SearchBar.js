@@ -16,11 +16,24 @@ export default function SearchBar({ selectedCategory }) {
         const fetchFilteredItems = () => {
             const inputValue = value.trim().toLowerCase();
             const inputLength = inputValue.length;
-            if (inputLength === 0) {
+            if (selectedCategory === "All") {
+                if (inputLength === 0) {
+                    setFilteredItems(AllItems);
+                }
+                else {
+                    const filteredItems = AllItems.filter((item) =>
+                        item.feSearch.toLowerCase().includes(inputValue)
+                    );
+                    setFilteredItems(filteredItems);
+                }
+
+            }
+            else if (inputLength === 0) {
                 // If input is empty, show all items
                 const categoryFilteredItems = AllItems.filter(item => item.feCategory === selectedCategory);
                 setFilteredItems(categoryFilteredItems);
             }
+
             else {
                 const filteredItems = AllItems.filter((item) =>
                     item.feSearch.toLowerCase().includes(inputValue) && item.feCategory === selectedCategory
@@ -67,7 +80,6 @@ export default function SearchBar({ selectedCategory }) {
             .filter(
                 (feSearch) =>
                     feSearch.slice(0, inputLength) === inputValue ||
-                    feSearch.includes(value.toLowerCase()) ||
                     feSearch.startsWith(value.toLowerCase())
             )
             .map((feSearch) => ({ feSearch }));
@@ -77,12 +89,13 @@ export default function SearchBar({ selectedCategory }) {
 
     const renderSuggestion = (suggestion) => (
         <div
-            className="p-1 cursor-pointer flex items-center justify-between px-10 bg-gray-300"
+            className="p-1 cursor-pointer flex items-center justify-between px-10 transition duration-300 hover:bg-gray-100 hover:border-b-2 hover:border-[#333]"
             onClick={() => handleSuggestionClick(suggestion)}
         >
-            <span className="text-md lg:text-lg  text-[#222]">{suggestion.feSearch}</span>
+            <span className="text-md lg:text-lg text-[#222]">{suggestion.feSearch}</span>
         </div>
     );
+
 
     const handleSuggestionClick = (suggestion) => {
         setValue(suggestion.feSearch);
@@ -102,7 +115,7 @@ export default function SearchBar({ selectedCategory }) {
                         renderSuggestion={renderSuggestion}
                         inputProps={{
                             ...inputProps,
-                            className: "w-full lg:w-full outline-none border-2 rounded-full  truncate pl-16 text-md lg:text-xl font-bold text-[#222] placeholder:text-[#777]",
+                            className: "w-full lg:w-full outline-none border-2 rounded-full  truncate pl-5 py-2 text-md lg:text-xl font-bold text-[#222] placeholder:text-[#777]",
                         }}
                         theme={{
                             container: "m-2 relative w-full",
@@ -128,10 +141,10 @@ export default function SearchBar({ selectedCategory }) {
             </div>
 
             <div className="hidden lg:block">
-                <div className="behance-toools flex items-center justify-between pb-5 px-5   ">
+                <div className="behance-toools flex items-center justify-between pb-5 px-5">
                     <div className='flex items-center'>
-                        {tagName.map((tools) => (
-                            <div className="tools-item flex items-center border rounded-md px-3 py-2 mx-3 justify-between">
+                        {tagName.map((tools, index) => (
+                            <div key={index} className="tools-item flex items-center border rounded-md px-3 py-2 mx-3 justify-between">
                                 <div className="t-icon">
                                     {tools.tagsIcon}
                                 </div>
@@ -141,9 +154,9 @@ export default function SearchBar({ selectedCategory }) {
                             </div>
                         ))}
                     </div>
-
                 </div>
             </div>
+
 
             <Card items={filteredItems} />
         </>

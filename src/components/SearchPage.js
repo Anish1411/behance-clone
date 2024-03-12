@@ -10,9 +10,12 @@ export default function SearchPage() {
     };
 
     return (
-        <div >
+        <div className="relative" >
             <SearchBar selectedCategory={selectedCategory} />
-            <Button onCategoryChange={handleCategoryChange} />
+            <div className="absolute lg:top-28 lg:right-20 md:top-16 md:right-10 sm:top-16 sm:right-10 top-14 right-12">
+                <Button onCategoryChange={handleCategoryChange} />
+            </div>
+
         </div>
     );
 }

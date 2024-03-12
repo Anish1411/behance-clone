@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { AllItems } from '../Data'
-import { AiFillFolderOpen, AiFillLike, AiTwotoneEye } from 'react-icons/ai'
+import { AiFillFolderOpen, AiFillLike, AiOutlineLike, AiTwotoneEye } from 'react-icons/ai'
 
 export default function Card({ items }) {
     // console.log("searchTerm", searchTerm + " ");
+    const [likedItems, setLikedItems] = useState([]);
+
+    const handleLike = (index) => {
+        // Find the corresponding item in the 'items' array
+        const currentItem = items[index];
+
+        if (!likedItems.includes(index)) {
+            // Increase the like count and add to likedItems array
+            currentItem.feLike += 1;
+            setLikedItems([...likedItems, index]);
+        } else {
+            // Decrease the like count and remove from likedItems array
+            currentItem.feLike -= 1;
+            setLikedItems(likedItems.filter((item) => item !== index));
+        }
+
+    };
+
     return (
         <>
             <div className="container-fluid px-6">
@@ -30,7 +48,10 @@ export default function Card({ items }) {
                                         </div>
                                         <div className="be-time flex">
                                             <div className="be-like flex mr-2">
-                                                <div className="li-icon text-[#959595] mr-1 mt-[2px]">
+                                                <div
+                                                    className={`li-icon text-[#959595] mr-1 mt-[2px] ${likedItems.includes(index) ? 'text-blue-500' : ''}`}
+                                                    onClick={() => handleLike(index)}
+                                                >
                                                     <AiFillLike />
                                                 </div>
                                                 <span className='text-sm font-medium text-[#959595]'>{item.feLike}</span>

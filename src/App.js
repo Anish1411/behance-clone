@@ -9,7 +9,7 @@ function App() {
     <div >
       <Header />
       <MainPage />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
