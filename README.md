@@ -1,4 +1,4 @@
-# Creative Project Explorer
+# Behance-Clone
 
 A web application for exploring creative projects with advanced search and sorting capabilities.
 
@@ -18,7 +18,7 @@ A web application for exploring creative projects with advanced search and sorti
 
 ## Introduction
 
-The Creative Project Explorer is designed to help users discover and explore various creative projects. With a powerful search feature, users can find projects that match their interests, and the sorting options provide a tailored experience.
+This Project has powerful search feature, users can find projects that match their interests, and the sorting options provide a tailored experience.
 
 ## Features
 
