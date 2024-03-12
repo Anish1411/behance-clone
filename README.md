@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Creative Project Explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web application for exploring creative projects with advanced search and sorting capabilities.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Introduction](#introduction)
+- [Features](#features)
+  - [1. Search (with Autocompletion)](#1-search-with-autocompletion)
+  - [2. Sort by Category](#2-sort-by-category)
+  - [Bonus Features](#bonus-features)
+    - [2.1 View Image in Modal](#21-view-image-in-modal)
+    - [2.2 Like an Image](#22-like-an-image)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Creative Project Explorer is designed to help users discover and explore various creative projects. With a powerful search feature, users can find projects that match their interests, and the sorting options provide a tailored experience.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+### 1. Search (with Autocompletion)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- A user-friendly search bar with autocomplete suggestions.
+- Quick access to projects by typing keywords.
 
-### `npm run build`
+### 2. Sort by Category
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Filter projects by different categories for a customized browsing experience.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Bonus Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 2.1 View Image in Modal
 
-### `npm run eject`
+- Click on any project image to open a modal and view it in a larger size.
+- Enhances the user experience by providing a detailed look at the project.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### 2.2 Like an Image
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Showcases a "like" button for each image, allowing users to express their appreciation.
+- An engaging feature to simulate interaction with the displayed images.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Getting Started
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Follow these steps to set up and run the project on your local machine:
 
-## Learn More
+1. **Clone the repository:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```bash
+    git clone https://github.com/your-username/creative-project-explorer.git
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. **Navigate to the project directory:**
 
-### Code Splitting
+    ```bash
+    cd creative-project-explorer
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. **Install dependencies:**
 
-### Analyzing the Bundle Size
+    ```bash
+    npm install
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. **Start the development server:**
 
-### Making a Progressive Web App
+    ```bash
+    npm start
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Usage
 
-### Advanced Configuration
+- Open the application in your web browser.
+- Use the search bar to find projects based on keywords.
+- Explore different project categories using the sorting options.
+- Click on project images to view them in a modal.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.
